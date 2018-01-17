@@ -38,5 +38,23 @@ namespace BetterLinq
                 .Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize);
         }
+
+        /// <summary>
+        /// Paginates an enumeration and returns the parameters used for paginating along with the total number of 
+        /// elements in the entire collection.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the collection.</typeparam>
+        /// <param name="collection">The collection to be paginated.</param>
+        /// <param name="pageSize">The size of the page.</param>
+        /// <param name="pageNumber">The number of the page.</param>
+        /// <returns>The paginated collection.</returns>
+        public static PageWithTotal<T> PageWithTotal<T>(this IEnumerable<T> collection, int pageSize, int pageNumber = 1)
+        {
+            return new PageWithTotal<T>(
+                values: collection.Page(pageSize, pageNumber),
+                pageSize: pageSize,
+                pageNumber: pageNumber,
+                total: collection.Count());
+        }
     }
 }

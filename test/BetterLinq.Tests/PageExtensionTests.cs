@@ -74,5 +74,44 @@ namespace BetterLinq.Tests
 
             action.ShouldThrow<ArgumentOutOfRangeException>();
         }
+
+        [Theory]
+        [InlineData(0, 3, 0)]
+        [InlineData(3, 3, 1)]
+        [InlineData(5, 3, 2)]
+        [InlineData(9, 3, 3)]
+        [InlineData(10, 3, 4)]
+        public void PageWithTotal_ValidPages(int numberOfElements, int pageSize, int expectedPages)
+        {
+            // Arrange
+            var collection = Enumerable.Range(0, numberOfElements);
+
+            // Act + Assert
+            var currentElement = 0;
+
+            for (int page = 1; page < expectedPages + 1; page++)
+            {
+                var result = collection.PageWithTotal(pageSize, page);
+                result.Should().NotBeNull();
+
+                result.Total.Should().Be(collection.Count());
+                result.PageNumber.Should().Be(page);
+                result.PageSize.Should().Be(pageSize);
+                result.Values.Should().NotBeNull();
+
+                var expectedPageCount = page < expectedPages
+                    ? pageSize
+                    : numberOfElements - pageSize * (expectedPages - 1);
+
+                result.Values.Count().Should().Be(expectedPageCount);
+
+                for (int i = 0; i < expectedPageCount; ++i)
+                {
+                    result.Values.ElementAt(i).Should().Be(currentElement);
+                    currentElement++;
+                }
+            }
+        }
+
     }
 }
