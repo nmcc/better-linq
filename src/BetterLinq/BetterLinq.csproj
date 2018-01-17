@@ -4,10 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>BetterLinq</AssemblyName>
     <RootNamespace>BetterLinq</RootNamespace>
+    <PackageId>BetterLinq</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Nuno Caneco</Authors>
+    <Description>Utility extensions to LINQ</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <Copyright>Copyright 2018 (c) Nuno Caneco. All rights reserved.</Copyright>
+    <PackageTags>linq extensions utility utilities</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-  </ItemGroup>
 
 </Project>
