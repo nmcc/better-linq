@@ -48,6 +48,8 @@ namespace BetterLinq
         /// <param name="pageSize">The size of the page.</param>
         /// <param name="pageNumber">The number of the page.</param>
         /// <returns>The paginated collection.</returns>
+        /// <remarks>This method makes a call to LINQ's Count() method, which requires the
+        /// collection to be iterated immediately.</remarks>
         public static PageWithTotal<T> PageWithTotal<T>(this IEnumerable<T> collection, int pageSize, int pageNumber = 1)
         {
             return new PageWithTotal<T>(
